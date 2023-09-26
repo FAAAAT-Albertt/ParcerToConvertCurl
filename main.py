@@ -12,32 +12,61 @@ def parce_visa():
     format_date = date.strftime("%m/%d/%Y")
 
     for current in mas_currents_visa:
+        st = ""
         current = current.replace("\n", "").strip()
+        try:
 
-        params_visa = {
-            'amount': '1000',
-            'fee': '2',
-            'utcConvertedDate': format_date,
-            'exchangedate': format_date,
-            'fromCurr': 'KZT',
-            'toCurr': current,
-        }
+            params_visa = {
+                'amount': '1000',
+                'fee': '2',
+                'utcConvertedDate': "09/26/2023",
+                'exchangedate': "09/26/2023",
+                'fromCurr': 'KZT',
+                'toCurr': current,
+            }
 
-        response = requests.get('https://www.visa.com.kz/cmsapi/fx/rates', params=params_visa, cookies=cookies_visa, headers=headers_visa)
-        json_data = response.json()
-        current_visa = current + "_" + "visa"
-        convert_visa = json_data['convertedAmount'].replace(",", "")
-        iter_cur.append({current_visa: convert_visa})
+            response = requests.get('https://www.visa.com.kz/cmsapi/fx/rates', params=params_visa, cookies=cookies_visa, headers=headers_visa)
+            json_data = response.json()
 
-        params_master = {
-            'fxDate': '0000-00-00',
-            'transCurr': current,
-            'crdhldBillCurr': 'KZT',
-            'bankFee': '2',
-            'transAmt': '1000',
-        }
+            currentfrom = json_data['conversionFromCurrency']
+            convert_visa = json_data['convertedAmount'].replace(",", "")
+            st += f"VISA {currentfrom} -> {convert_visa};"
+
+        except:
+            pass
+
 
         try:
+
+            params_visa = {
+                'amount': '1000',
+                'fee': '2',
+                'utcConvertedDate': "09/26/2023",
+                'exchangedate': "09/26/2023",
+                'fromCurr': current,
+                'toCurr': "KZT",
+            }
+
+            response = requests.get('https://www.visa.com.kz/cmsapi/fx/rates', params=params_visa, cookies=cookies_visa, headers=headers_visa)
+            json_data = response.json()
+
+            currentfrom = json_data['conversionFromCurrency']
+            convert_visa = json_data['convertedAmount'].replace(",", "")
+            st += f" VISA {currentfrom} -> {convert_visa};"
+
+        except:
+            pass
+
+        try:
+            params_master = {
+                'fxDate': '0000-00-00',
+                'transCurr': current,
+                'crdhldBillCurr': 'KZT',
+                'bankFee': '2',
+                'transAmt': '1000',
+            }
+
+
             response = requests.get(
                 'https://www.mastercard.us/settlement/currencyrate/conversion-rate',
                 params=params_master,
@@ -45,50 +74,49 @@ def parce_visa():
                 headers=headers_master,
             )
             json_data2 = response.json()
-            current_master = json_data2['data']['transCurr'] + "_" + "master"
+
+            transCurr = json_data2['data']['transCurr']
             convert_master = json_data2['data']['crdhldBillAmt']
+            st += f"MS {transCurr} -> {convert_master};"
+
         except:
-            current_master = json_data2['data']['transCurr'] + "_" + "master"
-            convert_master = ""
-
-        iter_cur.append({current_master: convert_master})
-
-        pass
+            pass
 
 
-
-
-        # with open('data.csv', "a", encoding="utf-8") as file:
-        #     writer = csv.writer(file, delimiter=" ")
-        #     writer.writerow(())
-
-
-
-def parce_master():
-
-    for current in mas_currents_visa:
-        current = current.replace("\n", "").strip()
-
-        params_master = {
-            'fxDate': '0000-00-00',
-            'transCurr': current,
-            'crdhldBillCurr': 'KZT',
-            'bankFee': '2',
-            'transAmt': '1000',
-        }
         try:
+            params_master = {
+                'fxDate': '0000-00-00',
+                'transCurr': 'KZT',
+                'crdhldBillCurr': current,
+                'bankFee': '2',
+                'transAmt': '1000',
+            }
+
+
             response = requests.get(
                 'https://www.mastercard.us/settlement/currencyrate/conversion-rate',
                 params=params_master,
                 cookies=cookies_master,
                 headers=headers_master,
             )
-            i = response.json()
+            json_data2 = response.json()
+
+            transCurr = json_data2['data']['transCurr']
+            convert_master = json_data2['data']['crdhldBillAmt']
+            st += f" MS {transCurr} -> {convert_master};\n"
         except:
-            convert = ""
-        pass
+            pass
+
+        with open('data.csv', "a", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow([st])
 
 
+
+def load_csv(st):
+    with open('data.csv', "a", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([st])
 
 
 def main():
