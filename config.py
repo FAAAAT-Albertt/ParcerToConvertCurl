@@ -1,0 +1,192 @@
+visa_currents = """
+AED -
+AFN -
+ALL -
+AMD -
+ANG -
+AOA -
+ARS -
+AUD -
+AWG -
+AZN -
+BAM -
+BBD -
+BDT -
+BGN -
+BHD -
+BIF -
+BMD -
+BND -
+BOB -
+BRL -
+BSD -
+BTN -
+BWP -
+BYN -
+BZD -
+CAD -
+CDF -
+CHF -
+CLP -
+CNY -
+COP -
+CRC -
+CVE -
+CYP -
+CZK -
+DJF -
+DKK -
+DOP -
+DZD -
+EEK -
+EGP -
+ERN -
+ETB -
+EUR -
+FJD -
+FKP -
+GBP -
+GEL -
+GHS -
+GIP -
+GMD -
+GNF -
+GQE -
+GTQ -
+GWP -
+GYD -
+HKD -
+HNL -
+HRK -
+HTG -
+HUF -
+IDR -
+ILS -
+INR -
+IQD -
+IRR -
+ISK -
+JMD -
+JOD -
+JPY -
+KES -
+KGS -
+KHR -
+KMF -
+KRW -
+KWD -
+KYD -
+KZT -
+LAK -
+LBP -
+LKR -
+LRD -
+LSL -
+LTL -
+LVL -
+LYD -
+MAD -
+MDL -
+MGA -
+MKD -
+MMK -
+MNT -
+MOP -
+MRO -
+MRU -
+MTL -
+MUR -
+MVR -
+MWK -
+MXN -
+MYR -
+MZN -
+NAD -
+NGN -
+NIO -
+NOK -
+NPR -
+NZD -
+OMR -
+PAB -
+PEN -
+PGK -
+PHP -
+PKR -
+PLN -
+PYG -
+QAR -
+RON -
+RSD -
+RUB -
+RWF -
+SAR -
+SBD -
+SCR -
+SDG -
+SEK -
+SGD -
+SHP -
+SIT -
+SKK -
+SLE -
+SLL -
+SOS -
+SRD -
+SSP -
+STD -
+STN -
+SVC -
+SYP -
+SZL -
+THB -
+TJS -
+TMT -
+TND -
+TOP -
+TRY -
+TTD -
+TWD -
+TZS -
+UAH -
+UGX -
+USD -
+UYU -
+UZS -
+VEF -
+VES -
+VND -
+VUV -
+WST -
+XAF -
+XCD -
+XOF -
+XPF -
+YER -
+ZAR -
+ZMW -
+ZWL -
+"""
+mas_currents = visa_currents.split("-")
+
+cookies = {
+    '__cfruid': '16bd63232c395e47a627921a38dfa177e85dc71a-1695718026',
+    'wscrCookieConsent': '1=true&2=false&3=false&4=false&5=false&visitor=647a056e-033c-4a65-a469-c1049e1eda5f&version=20230911-001',
+    'utag_main': 'v_id:018ad0abb1810098f79892926f180506f005b06700978$_sn:1$_se:33$_ss:0$_st:1695721501932$ses_id:1695718027651%3Bexp-session$_pn:4%3Bexp-session$_prevpage:www.visa.com.kz%2Fru_KZ%2Fsupport%2Fconsumer%2Ftravel-support%2Fexchange-rate-calculator.html%3Bexp-1695723301958',
+    'lbs': '!yWpgADleoyIQiS+hTK7BLDNA2UyawAxqLTfXblwsFuXJ17TzZA5HlaZp5BaVQRKDDqbh2Y0pFwkWqZ7sz8jLtXjbttqOTmPtMKwjzgcl',
+}
+
+headers = {
+    'authority': 'www.visa.com.kz',
+    'accept': 'application/json, text/plain, */*',
+    'accept-language': 'ru,en-US;q=0.9,en;q=0.8',
+    # 'cookie': '__cfruid=16bd63232c395e47a627921a38dfa177e85dc71a-1695718026; wscrCookieConsent=1=true&2=false&3=false&4=false&5=false&visitor=647a056e-033c-4a65-a469-c1049e1eda5f&version=20230911-001; utag_main=v_id:018ad0abb1810098f79892926f180506f005b06700978$_sn:1$_se:33$_ss:0$_st:1695721501932$ses_id:1695718027651%3Bexp-session$_pn:4%3Bexp-session$_prevpage:www.visa.com.kz%2Fru_KZ%2Fsupport%2Fconsumer%2Ftravel-support%2Fexchange-rate-calculator.html%3Bexp-1695723301958; lbs=!yWpgADleoyIQiS+hTK7BLDNA2UyawAxqLTfXblwsFuXJ17TzZA5HlaZp5BaVQRKDDqbh2Y0pFwkWqZ7sz8jLtXjbttqOTmPtMKwjzgcl',
+    'referer': 'https://www.visa.com.kz/ru_KZ/support/consumer/travel-support/exchange-rate-calculator.html',
+    'sec-ch-ua': '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+}
